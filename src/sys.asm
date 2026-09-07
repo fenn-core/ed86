@@ -7,24 +7,24 @@ global sys_exit
 section .text
 
 sys_read: 
-	xor rax, rax
+	xor eax, eax
 	syscall 
 	ret
 
 
 sys_write:
-	mov rax, 1
+	mov eax, 1
 	syscall
 	ret
 
 
 sys_close: 
-	mov rax, 3 
+	mov eax, 3 
 	syscall
 	ret
 	
 
 sys_exit: 
-	mov rax, 60
+	mov eax, 60
 	syscall 
 
