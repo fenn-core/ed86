@@ -1,5 +1,6 @@
 global sys_read
 global sys_write
+global sys_openat
 global sys_close
 global sys_exit
 
@@ -13,11 +14,19 @@ sys_read:
 	ret
 
 
-; int close(int fd);
+; ssize_t write(int fd, const void *buf, size_t count);
 sys_write:
 	mov eax, 1
 	syscall
 	ret
+
+
+; int openat(int dirfd, const char *path, int flags, mode_t mode);
+sys_openat: 
+	mov eax, 257
+	mov r10, rcx
+	syscall
+	ret	
 
 
 ; int close(int fd);
@@ -25,14 +34,6 @@ sys_close:
 	mov eax, 3 
 	syscall
 	ret
-
-
-; int openat(int dirfd, const char *path, int flags, mode_t mode);
-file_open_ro: 
-	mov eax, 257
-	mov r10, rcx
-	syscall
-	ret	
 
 
 ; void exit(int status);
